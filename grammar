@@ -1,0 +1,9 @@
+main = expression (Line declaration)*
+expression = logic (If logic Else logic)?
+logic = arithmetic ((More | Less | SuperEqual) arithmetic)*
+arithmetic = term ((Plus | Minus) term)*
+term = signed ((Divide | Multiply) signed)*
+signed = (Plus | Minus)? factor
+factor = single (Pow signed)?
+single = Number | General | LeftBracket expression RightBracket
+declaration = General Equal main
