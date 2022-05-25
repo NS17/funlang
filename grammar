@@ -1,9 +1,17 @@
-main = expression (Line declaration)*
-expression = logic (If logic Else logic)?
+main = (function)* expression
+expression = conditional (Line declaration)*
+conditional = logic (If logic Else logic)?
 logic = arithmetic ((More | Less | SuperEqual) arithmetic)*
 arithmetic = term ((Plus | Minus) term)*
 term = signed ((Divide | Multiply) signed)*
 signed = (Plus | Minus)? factor
 factor = single (Pow signed)?
-single = Number | General | LeftBracket expression RightBracket
-declaration = General Equal main
+single = Number | Letter | LeftBracket expression RightBracket | function call
+declaration = Letter Equal main
+function = fun Letter (Letter)*: main
+function call = Letter LeftBracket (Letter)* RightBracket
+
+fun s(x, y):
+  x + y + z
+    | z = x * y
+    || x = 2

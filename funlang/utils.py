@@ -1,0 +1,10 @@
+from .tokenizer import parse_string
+from .parser import Parser
+from .interpreter import Interpreter
+
+
+def run_code(input_string: str):
+    tokens = list(parse_string(input_string))
+    ast = Parser(tokens).parse_main()
+    interpreter = Interpreter()
+    return interpreter.execute(ast)
