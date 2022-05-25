@@ -1,3 +1,8 @@
+"""
+This module contains different exception types
+"""
+
+
 class TokenizationError(Exception):
     pass
 

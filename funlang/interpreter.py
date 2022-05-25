@@ -1,6 +1,6 @@
 import re
 
-from .parser import BinOp, UnaryOp, Constant, General, Expression, Conditional, Main, FunctionCall
+from .parser import BinOp, UnaryOp, Constant, General, Expression, Conditional, Main, FunctionCall, AST
 from .errors import InterpreterError
 
 
@@ -10,11 +10,14 @@ def camel_to_snake(name):
 
 
 class Interpreter:
+    """
+    This class contains methods to execute AST structure returned by parser
+    """
     def __init__(self):
         self.decs = []
         self.funcs = {}
 
-    def execute(self, node):
+    def execute(self, node: AST):
         method_name = 'execute_' + camel_to_snake(type(node).__name__)
         return getattr(self, method_name)(node)
 
@@ -28,14 +31,16 @@ class Interpreter:
 
     def execute_expression(self, node: Expression):
         decs = {}
-
+        # store declarations
         for dec in node.declarations:
             name = dec.letter.value.value
             if name in decs:
                 raise InterpreterError(f'Repeated declaration {name}')
             decs[name] = dec.declaration, False
 
+        # add a scope
         self.decs.append(decs)
+
         result = self.execute(node.expression)
         self.decs.pop()
         return result

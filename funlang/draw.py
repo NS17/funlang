@@ -5,6 +5,11 @@ from .parser import AST
 
 
 def visualize(root):
+    """
+    Renders AST structure in root
+    :param root: AST
+    :return: None
+    """
     def convert(node: AST):
         children = []
         for x in fields(node):
@@ -18,10 +23,3 @@ def visualize(root):
 
     for pre, fill, node in RenderTree(convert(root)):
         print("%s%s" % (pre, node.name))
-
-    # return RenderTree(
-    #     convert(root),
-    #     # edgeattrfunc=lambda parent, child: (parent.edge,),
-    #     # nodeattrfunc=lambda node: f"shape='box', label=\"{node.name}\"",
-    #     # nodenamefunc=lambda node: hex(id(node.original))
-    # )

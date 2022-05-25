@@ -72,16 +72,25 @@ class Constant(AST):
 
 
 class Parser:
-    def __init__(self, tokens):
+    """
+    Class that transforms tokens into AST structure
+    """
+    def __init__(self, tokens: list):
         self.tokens: Sequence[Token] = tokens
         self.index: int = 0
-        self.state = 0
+        self.state: int = 0
 
     def parse_main(self):
+        """
+        Entrypoint, parses Main into AST
+        :return: AST
+        """
+        # parse and store functions
         functions = []
         while self.matches(TokenType.Function):
             functions.append(self.parse_function())
 
+        # parse expression
         return Main(functions, self.parse_expression())
 
     def parse_expression(self):
@@ -149,14 +158,15 @@ class Parser:
             return Constant(token)
 
         if token.type is TokenType.Letter:
-
             # we found function call "func_name(...)"
             if self.next(TokenType.LeftBracket):
                 return self.parse_function_call()
 
+            # regular variable
             self.advance()
             return General(token)
 
+        # parse brackets structure
         if token.type is TokenType.LeftBracket:
             self.advance()
             result = self.parse_expression()
@@ -195,6 +205,7 @@ class Parser:
 
         self.advance()
         args = []
+        # parse function args
         while self.matches(TokenType.Letter, TokenType.Number):
             args.append(self.parse_single())
 
@@ -213,6 +224,8 @@ class Parser:
             token = self.consume()
             left = BinOp(left, getattr(self, method_name)(), token.type)
         return left
+
+    # utils
 
     @property
     def current(self):

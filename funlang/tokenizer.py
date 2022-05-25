@@ -7,7 +7,7 @@ from .errors import TokenizationError
 
 class TokenType(enum.Enum):
     """
-    Class that contains
+    Class that contains possible types of the tokens
     """
     Number = enum.auto()
     Plus = '+', operator.add, operator.pos
@@ -42,7 +42,12 @@ types_unq_dict = {x.value[0]: Token(x, x.value) for x in TokenType if
                   x not in [TokenType.Number, TokenType.Letter, TokenType.Line]}
 
 
-def parse_string(s):
+def parse_string(s: str):
+    """
+    Transforms string into tokens
+    :param s: input string
+    :return: tokens
+    """
     s = list(s)
 
     while s:

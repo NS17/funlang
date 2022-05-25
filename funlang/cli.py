@@ -4,6 +4,9 @@ from funlang.utils import run_code
 
 
 def entrypoint():
+    """
+    Entrypoint for console command - executes code in string format
+    """
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group()
     group.add_argument('filename', nargs='?', default=None, help='path to file containing code')
