@@ -64,13 +64,21 @@ Funlang also supports conditional statements and functions.
 For example:
 
 ```
-fun incr_sum_pow(x, y, p):
-    x = x + 1 if x < 0 else x + 2
-    (x + y) ** p
+    fun incrsumpow(x, y, p):
+        ((x + 1 if x < 0 else x + 2) + y) ** p
     
-t - incr_sum_pow(x, y, p) + 7 
-    | t = 10
-    | p = 4
-    | x = 0
-    | y = 1
+    t - incrsumpow(x, y, p) + 7 
+        | t = 10
+        | p = 4
+        | x = 0
+        | y = 1
+```
+prints `-64.0`
+
+## Tests
+
+You can run tests by pytest
+
+```commandline
+pytest tests
 ```

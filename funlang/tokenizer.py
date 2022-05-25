@@ -23,7 +23,7 @@ class TokenType(enum.Enum):
     Line = enum.auto()
 
     Equal = '=',
-    Less = '<', operator.le
+    Less = '<', operator.lt
     More = '>', operator.gt
     SuperEqual = '==', operator.eq
     If = 'if',

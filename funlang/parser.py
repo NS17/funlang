@@ -174,7 +174,6 @@ class Parser:
                 raise ParseError('Invalid brackets')
             self.advance()
             return result
-
         raise ParseError(f'Invalid expression')
 
     def parse_function_call(self):
