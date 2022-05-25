@@ -6,7 +6,21 @@ from .parser import AST
 
 def visualize(root):
     """
-    Renders AST structure in root
+    Renders AST structure (after parsing) in root
+    For example draws "x + y | x = 1 | y = 0" as
+    Main
+    └── Expression
+        ├── BinOp
+        │   ├── General
+        │   └── General
+        ├── Declaration
+        │   ├── General
+        │   └── Expression
+        │       └── Constant
+        └── Declaration
+            ├── General
+            └── Expression
+                └── Constant
     :param root: AST
     :return: None
     """
