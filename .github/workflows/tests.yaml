@@ -21,7 +21,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pytest tests --junitxml=junit.xml --cov="funlang" --cov-report=xml --cov-branch
+          pytest tests --junitxml=junit.xml --cov="funlang" --cov-branch
       - name: Generate coverage report
         run: |
           coverage xml -o coverage.xml
