@@ -11,7 +11,3 @@ declaration = Letter Equal main
 function = fun Letter (Letter)*: main
 function call = Letter LeftBracket (Letter)* RightBracket
 
-fun s(x, y):
-  x + y + z
-    | z = x * y
-    || x = 2

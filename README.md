@@ -4,10 +4,11 @@ Funlang is a simple functional programming language implemented in Python.
 
 ## Installation
 
-You can install package by
+You can install it by
 
-```commandline
-git clone git@github.com:NS17/interpreter.git
+```shell
+git clone https://github.com/NS17/funlang.git
+cd funlang
 pip install -e .
 ```
 
@@ -15,40 +16,49 @@ pip install -e .
 
 You can execute code in funlang by running
 
-```commandline
+```shell
 funlang -c "code in funlang"
 ```
 
 For example
 
-```commandline
-funlang -c "x + y | x = 1| y = 2"
+```shell
+funlang -c "x + y | x = 1 | y = 2"
 ```
 
 Or using a file:
 
-```commandline
+```shell
 funlang filename.fun
 ```
 
 ## Syntax
 
-Funlang can execute basic arithmetic operations like `+, -, *, /, **`.
-For example, you can run
+Funlang can execute basic arithmetic operations like `+, -, *, /, **`. For example, you can run
 
-```commandline
-5 * (9 + 7 - 8 / 4)**(5 - 3)
+```
+5 * (9 + 7 - 8 / 4) ** (5 - 3)
 ```
 
-It also supports variables with declarations through `|`.
-For example,
+It also supports variables with declarations through `|`. For example,
 
-`(x + y) - t | x = 1 | y = 2 | t = 0`
+```
+(x + y) ** 2 - t | x = 1 | y = 2 | t = 0
+```
+
+or in a more readable layout
+
+```
+(x + y) ** 2 - t 
+  | x = 1 
+  | y = 2 
+  | t = 0
+```
 
 Declarations can be nested. So you can execute something like this:
 
 ```
-(x + y) - t 
+(x + y) ** 2 - t 
     | x = 1
     | y = p ** r 
         || p = 9
@@ -58,27 +68,27 @@ Declarations can be nested. So you can execute something like this:
         || r = 1
 ```
 
-The number of `|` in declaration indicated the scope level.
+The number of `|` in declaration indicates the scope level.
 
-Funlang also supports conditional statements and functions.
-For example:
+Funlang also supports conditional statements and functions. For example:
 
 ```
-    fun incrsumpow(x, y, p):
-        ((x + 1 if x < 0 else x + 2) + y) ** p
-    
-    t - incrsumpow(x, y, p) + 7 
-        | t = 10
-        | p = 4
-        | x = 0
-        | y = 1
+fun incrsumpow(x, y, p):
+    ((x + 1 if x < 0 else x + 2) + y) ** p
+
+t - incrsumpow(x, y, p) + 7 
+    | t = 10
+    | p = 4
+    | x = 0
+    | y = 1
 ```
-prints `-64.0`
+
+Outputs `-64.0`
 
 ## Tests
 
-You can run tests by pytest
+You can run tests via pytest
 
-```commandline
+```shell
 pytest tests
 ```
