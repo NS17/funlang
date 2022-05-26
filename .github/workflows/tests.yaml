@@ -1,0 +1,34 @@
+name: Python package
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install
+        run: |
+          pip install -e .
+          pip install -r tests/requirements.txt
+
+      - name: Test with pytest
+        run: |
+          pytest tests --junitxml=junit.xml --cov="funlang" --cov-report=xml --cov-branch
+      - name: Generate coverage report
+        run: |
+          coverage xml -o coverage.xml
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: '*-3.9.xml'
+        if: ${{ always() }}
